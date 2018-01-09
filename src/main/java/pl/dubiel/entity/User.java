@@ -36,6 +36,8 @@ public class User {
 	@Column(unique = true)
 	private String email;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	List<Flat> flats = new ArrayList<>();
 
 	public User() {
 		super();
@@ -84,5 +86,15 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public List<Flat> getFlats() {
+		return flats;
+	}
+
+	public void setFlats(List<Flat> flats) {
+		this.flats = flats;
+	}
+	
+	
 	
 }
