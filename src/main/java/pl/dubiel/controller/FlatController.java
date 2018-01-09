@@ -38,7 +38,7 @@ public class FlatController {
 	@PostMapping("/addoffer")
 	public String addOfferPost(@Valid @ModelAttribute Flat flat, BindingResult bindingResult, Model m) {
 		if (bindingResult.hasErrors()) {
-			return "redirect:/addoffer";
+			return "redirect:/flat/addoffer";
 		}
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");

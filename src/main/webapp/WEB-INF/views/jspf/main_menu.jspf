@@ -23,8 +23,8 @@
 <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
   <h4 class="w3-bar-item"><b>Menu</b></h4>
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/">Home</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/user">My offers</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/flat/addoffer">Add offer</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">My offers</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="#">My messages</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="#">My comments</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="#">Change your account details</a>

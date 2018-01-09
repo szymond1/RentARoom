@@ -26,7 +26,7 @@ public class Flat {
 	
 	@NotEmpty
 	@Size(min = 4)
-	private String voivodeship;		// zrobic ModelAttribute
+	private String voivodeship;		
 	@NotEmpty
 	private String postCode;
 	@NotEmpty
@@ -37,7 +37,7 @@ public class Flat {
 	private String street;
 	@NotEmpty
 	@Size(min = 3)
-	private String typeOfFlat;		// ModelAtribtte
+	private String typeOfFlat;		
 	@NotNull
 	private double surface;
 	@NotNull

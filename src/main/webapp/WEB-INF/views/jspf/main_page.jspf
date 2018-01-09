@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+    <%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ page session="true" %>
+<p>
+  
+<c:choose>
+
+	<c:when test="${sessionScope.user == null}">		
+
+		<p>Wakacje?</p>
+		<p>Oczekiwanie na przesiadke?</p>
+		<p>A może wyjazd słuzbowy?</p>
+		
+		Z nami znajdziesz swoje miejsce, gdzie tylko zechcesz.
+		Baza miliona ofert mieszkań, domów i pokoi do wynajęcia.
+		<p><b>Zaloguj się</b>, by czerpać korzysci uzytkowania portalu</p> 
+			
+	</c:when>
+
+	<c:otherwise>
+	<h1 class="w3-text-teal">Homepage</h1>
+	<p class = allOffers>All offers</p>
+	<c:forEach items="${availableFlats}" var="flat">
+	<div>
+	<p>City: ${flat.city}</p>
+	<p>Type of Flat: ${flat.typeOfFlat}</p>
+	<p>Price: ${flat.price} zl</p>
+	<p>Author: ${flat.user.userName}</p>
+	<hr>
+	</div>
+	</c:forEach>
+	
+	<!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <div class="w3-bar">
+      <a class="w3-button w3-black" href="#">1</a>
+      <a class="w3-button w3-hover-black" href="#">2</a>
+      <a class="w3-button w3-hover-black" href="#">3</a>
+      <a class="w3-button w3-hover-black" href="#">4</a>
+      <a class="w3-button w3-hover-black" href="#">5</a>
+      <a class="w3-button w3-hover-black" href="#">»</a>
+    </div>
+  </div>
+	
+	</c:otherwise>	
+</c:choose>
+ 
+</p>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+    <%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ page session="true" %>
+
+<p class = allOffers> Offer by user: ${user.userName}</p>
+<p>
+<c:forEach items="${userFlats}" var="flat">
+<div>
+	<p>City: ${flat.city}</p>
+	<p>Type of Flat: ${flat.typeOfFlat}</p>
+	<p>Price: ${flat.price} zl</p>
+	<p>Author: ${flat.user.userName}</p>
+<hr>
+</div>
+</c:forEach>
+</p>
+
