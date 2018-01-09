@@ -32,7 +32,7 @@ public class User {
 	private boolean enabled;
 	
 	@NotEmpty
-	@Email
+	@Email(message="Niepoprawny email")
 	@Column(unique = true)
 	private String email;
 	

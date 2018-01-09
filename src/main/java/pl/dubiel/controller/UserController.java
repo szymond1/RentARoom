@@ -1,5 +1,7 @@
 package pl.dubiel.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -32,10 +34,23 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public String registerPost(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+	public String registerPost(@Valid @ModelAttribute User user, BindingResult bindingResult, Model m) {
 		if (bindingResult.hasErrors()) {
 			return "redirect:/register";
 		}
+		
+		List<User> users = this.userrepo.findAll();
+		for (User u : users) {
+			if (u.getEmail().equals(user.getEmail())) {
+				m.addAttribute("msg", "This email address is already used. Try different email.");
+				return "register";
+			}
+			if (u.getUserName().equals(user.getUserName())) {
+				m.addAttribute("msg1", "This username is already used. Try different username.");
+				return "register";
+			}
+		}
+		
 		this.userrepo.save(user);
 		return "redirect:/";
 	}
@@ -52,10 +67,10 @@ public class UserController {
 				if (u != null && u.isPasswordCorrect(loginData.getPassword())) {
 					HttpSession s = SessionManager.session();
 					s.setAttribute("user", u);
-					ra.addFlashAttribute("msg", "Jestes zalogowany");
+					ra.addFlashAttribute("msg", "Logged");
 					return "redirect:/";
 			}
-			m.addAttribute("msg", "Wprowadz poprawne dane");
+			m.addAttribute("msg", "Invalid username or password");
 			return "login";
 		}
 		

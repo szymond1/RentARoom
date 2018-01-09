@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -37,11 +38,11 @@ public class Flat {
 	@NotEmpty
 	@Size(min = 3)
 	private String typeOfFlat;		// ModelAtribtte
-	@NotEmpty
+	@NotNull
 	private double surface;
-	@NotEmpty
+	@NotNull
 	private double price;
-	@NotEmpty
+	@NotNull
 	private int numberOfGuests;
 	@NotEmpty
 	private String description;
@@ -51,7 +52,7 @@ public class Flat {
 		this.created = new Date();
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -99,7 +100,7 @@ public class Flat {
 		return description;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

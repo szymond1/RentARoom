@@ -9,7 +9,7 @@
 
 <%@ include file = "jspf/head_config.jspf" %>
 
-<title>RentaRoom</title>
+<title>RentaRoom app</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
@@ -23,30 +23,24 @@
 
 <div class="w3-main" style="margin-left:250px">
 
-<h1 class="w3-text-teal">Registration</h1>
-
+<h1 class="w3-text-teal">Add new offer</h1>
 <p class="error">${msg}</p>
-<p class="error">${msg1}</p>
 
-<form:form method="post" modelAttribute="user">
-	<p>User Name<form:input path="userName" /><form:errors path="userName"></form:errors></p>
-	<p>Email<form:input path="email" /><form:errors path="email"></form:errors></p>
-	<p>Password<form:password path="password" /><form:errors path="password"></form:errors></p>
+<form:form method="post" modelAttribute="flat">
+	<p>Voivodeship<form:select items="${voivodeship}" path="voivodeship"/>
+	<p>Postal Code<form:input path="postCode"/>
+	<p>City<form:input path="city"/>
+	<p>Street<form:input path="street"/>
+	<p>Type of Flat<form:select items="${typeOfFlat}" path="typeOfFlat"/>
+	<p>Surface<form:input path="surface"/>
+	<p>Price<form:input path="price"/>
+	<p>Numer of Guests<form:input path="numberOfGuests"/>
+	<p>Description<form:textarea path="description"/>
 <p><input type="submit" /></p>
+<form:errors></form:errors>
 </form:form>
 
-
-  <div class="w3-row w3-padding-64">
-    <div class="w3-twothird w3-container">
-      <h1 class="w3-text-teal">Heading</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
-        dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-  </div>
-
-
 <!-- END MAIN -->
-</div>
 <%@ include file = "jspf/footer.jspf" %>
 </body>
 </html>
