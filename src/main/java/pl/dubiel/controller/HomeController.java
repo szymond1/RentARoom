@@ -31,7 +31,7 @@ public class HomeController {
 	
 	@ModelAttribute("availableFlats")
 	public List<Flat> getAllFlats() {
-		return this.flatrepo.findAll();
+		return this.flatrepo.findAllOrder();
 		
 	}
 	

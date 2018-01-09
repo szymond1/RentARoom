@@ -27,7 +27,7 @@
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/flat/addoffer">Add offer</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="#">My messages</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="#">My comments</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Change your account details</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Account options</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/logout">Logout</a>
 </nav>
 	</c:otherwise>	

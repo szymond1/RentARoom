@@ -2,6 +2,7 @@ package pl.dubiel.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,8 +45,16 @@ public class FlatController {
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
 		flat.setUser(u);
+		flat.setCreated(new Date());
 		this.flatrepo.save(flat);
 		return "redirect:/";
+	}
+	
+	@GetMapping("/{id}")
+	public String particularFlat(Model m, @PathVariable long id) {
+		Flat flat = flatrepo.findOne(id);
+		m.addAttribute("flat", flat);
+		return "single_flat";
 	}
 	
 	@ModelAttribute("voivodeship")

@@ -6,14 +6,22 @@
 
 <p class = allOffers> Offer by user: ${user.userName}</p>
 <p>
+<c:choose>
+<c:when test="${empty userFlats}">
+	Nie znaleziono zadnych ofert
+</c:when>
+<c:otherwise>
 <c:forEach items="${userFlats}" var="flat">
 <div>
 	<p>City: ${flat.city}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
 	<p>Price: ${flat.price} zl</p>
 	<p>Author: ${flat.user.userName}</p>
+	<p><a href="flat/${flat.id}">Show more..</a></p>
 <hr>
 </div>
 </c:forEach>
+</c:otherwise>
+</c:choose>
 </p>
 
