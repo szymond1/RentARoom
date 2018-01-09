@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<p> Copywright: &copy Szymon Dubiel</p>
+<footer id="myFooter">
+    <div class="w3-container w3-theme-l2 w3-padding-32">
+      <h4 id="copywright">Copywright: &copy Szymon Dubiel</h4>
+    </div>
+
+    <div class="w3-container w3-theme-l1">
+      <p id="year">10.06.2018r. Cracow</p>
+    </div>
+  </footer>

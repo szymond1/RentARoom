@@ -10,16 +10,29 @@
 	<c:when test="${sessionScope.user == null}">
 		<a href="/RentaRoom/register">Register</a>
 		<a href="/RentaRoom/login">Login</a>
+		
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+  <h4 class="w3-bar-item"><b>Menu</b></h4>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/">Home Page</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/register">Registration</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/login">Login</a>
+</nav>
+		
 	</c:when>
 
 	<c:otherwise>
-		<a href="/RentaRoom/">All tweets</a>
-		<!--  <a href="/RentaRoom/user">Your tweets</a>
-		<a href="/RentaRoom/message">Your messages</a>
-		<a href="/RentaRoom/change">Change your account details</a> -->
-		<a href="/RentaRoom/logout">Logout</a>
-	</c:otherwise>
-	
+	<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+  <h4 class="w3-bar-item"><b>Menu</b></h4>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/">Home Page</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">My offers</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">My messages</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">My comments</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Change your account details</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/logout">Logout</a>
+</nav>
+	</c:otherwise>	
 </c:choose>
  
 </p>
