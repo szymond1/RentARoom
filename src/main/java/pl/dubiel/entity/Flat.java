@@ -54,6 +54,8 @@ public class Flat {
 	@NotEmpty
 	private String description;
 	
+	private String photo;
+	
 	@OneToMany(mappedBy = "flat", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Comment> comment = new ArrayList<>();
 	
@@ -168,6 +170,14 @@ public class Flat {
 	
 	public int getCommentSize() {
 		return this.comment.size();
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	

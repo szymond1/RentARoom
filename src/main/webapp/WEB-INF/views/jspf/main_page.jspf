@@ -3,8 +3,8 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
     <%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ page session="true" %>
-<p>
-  
+
+ 
 <c:choose>
 
 	<c:when test="${sessionScope.user == null}">		
@@ -23,15 +23,19 @@
 	<h1 class="w3-text-teal">Homepage</h1>
 	<p class = allOffers>All offers</p>
 	<c:forEach items="${availableFlats}" var="flat">
-	<div>
+	<div class = "div1">
 	<p>City: ${flat.city}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
 	<p>Price: ${flat.price} zl</p>
 	<p>Created: ${flat.created}</p>
 	<p>Author: ${flat.user.userName}</p>
 	<p><a href="flat/${flat.id}">Show more..</a></p>
-	<hr>
 	</div>
+	<div class = "div2">
+	<p><img src="/RentaRoom/resources/picture/${flat.photo}" width="300" height="250"/></p>
+	</div>
+	<br/>
+	<hr>
 	</c:forEach>
 	
 	<!-- Pagination -->
@@ -44,9 +48,8 @@
       <a class="w3-button w3-hover-black" href="#">5</a>
       <a class="w3-button w3-hover-black" href="#">»</a>
     </div>
-  </div>
-	
+  </div>	
+
 	</c:otherwise>	
 </c:choose>
  
-</p>

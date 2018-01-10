@@ -24,7 +24,7 @@
 	Log first if you want to add new offer!
 	</c:when>
 	<c:otherwise>
-		<form:form method="post" modelAttribute="flat">
+		<form:form method="post" modelAttribute="flat" enctype="multipart/form-data">
 		<p>Voivodeship<form:select items="${voivodeship}" path="voivodeship"/></p>
 		<p>Postal Code<form:input path="postCode"/></p><p class = "ferror"><form:errors path="postCode"></form:errors></p>
 		<p>City<form:input path="city"/></p><p class = "ferror"><form:errors path="city"></form:errors></p>
@@ -34,6 +34,7 @@
 		<p>Price<form:input path="price"/></p>
 		<p>Numer of Guests<form:input path="numberOfGuests"/></p>
 		<p>Description<form:textarea path="description"/></p><p class = "ferror"><form:errors path="description"></form:errors></p>
+		<p>Upload File: <input type="file" name="photo"></p>
 		<p><input type="submit" /></p>
 		</form:form>
 	</c:otherwise>

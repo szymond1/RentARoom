@@ -7,17 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <%@ include file = "jspf/head_config.jspf" %>
+
 </head>
 <body>
 <%@ include file = "jspf/header.jspf" %>
 <%@ include file = "jspf/main_menu.jspf" %>
 <div class="w3-main" style="margin-left:250px">
 
-
-
 <%@ include file = "jspf/main_page.jspf" %>
-
-
 <!-- END MAIN -->
 </div>
 <%@ include file = "jspf/footer.jspf" %>

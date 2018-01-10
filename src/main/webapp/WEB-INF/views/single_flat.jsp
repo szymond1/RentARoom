@@ -36,7 +36,7 @@
 	 <a href = "/RentaRoom/flat/delete/${flat.id}">Delete offer</a></p>-->
 	</c:if>
 	<div style = "color:blue">
-	<p style = "text-align: center"> Comments</p>
+	<p class = "comments"> Comments</p>
 	<c:forEach items="${comments}" var="comment">
 	<p>${comment.created}</p>
 	<p><a href ="/RentaRoom/userFlats/${comment.user.id}">${comment.user.userName}</a>: ${comment.text}</p>
