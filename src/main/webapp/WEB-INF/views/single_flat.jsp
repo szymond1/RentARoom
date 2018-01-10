@@ -7,20 +7,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <%@ include file = "jspf/head_config.jspf" %>
-
-<title>RentaRoom app</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <%@ include file = "jspf/header.jspf" %>
 <%@ include file = "jspf/main_menu.jspf" %>
 <div class="w3-main" style="margin-left:250px">
 
+<c:choose>
+	<c:when test="${sessionScope.user == null}">
+	Log first if you want to check offers!
+	</c:when>
+	<c:otherwise>
 <div>
 	<p>Localization: ${flat.postCode} ${flat.city} , ulica: ${flat.street} wojewodztwo ${flat.voivodeship}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
@@ -35,10 +32,13 @@
 	
 	<form action="/RentaRoom/flat/edit/${flat.id}"><button type="submit">Edit offer</button></form>
 	<form action="/RentaRoom/flat/delete/${flat.id}"><button type="submit">Delete offer</button></form>
+	
 	<!--  <p><a href = "/RentaRoom/flat/edit/${flat.id}">Edit offer</a>
 	
 	 <a href = "/RentaRoom/flat/delete/${flat.id}">Delete offer</a></p>-->
 	</c:if>
+	</c:otherwise>
+</c:choose>
 <hr>
 </div>
 

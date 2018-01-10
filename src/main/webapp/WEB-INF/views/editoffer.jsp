@@ -11,13 +11,6 @@
 
 <%@ include file = "jspf/head_config.jspf" %>
 
-<title>RentaRoom app</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css"/>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <%@ include file = "jspf/header.jspf" %>
@@ -34,16 +27,15 @@
 	<c:otherwise>
 		<form:form method="post" modelAttribute="flat">
 		<p>Voivodeship<form:select items="${voivodeship}" path="voivodeship"/></p>
-		<p>Postal Code<form:input path="postCode"/></p>
-		<p>City<form:input path="city"/></p>
-		<p>Street<form:input path="street"/></p>
-		<p>Type of Flat<form:select items="${typeOfFlat}" path="typeOfFlat"/></p>
+		<p>Postal Code<form:input path="postCode"/></p><form:errors class = "formerror" path="postCode"></form:errors>
+		<p>City<form:input path="city"/></p><form:errors class = "formerror" path="city"></form:errors>
+		<p>Street<form:input path="street"/></p><form:errors class = "formerror" path="street"></form:errors>
+		<p>Type of Flat<form:select items="${typeOfFlat}" path="typeOfFlat"/></p><form:errors class = "formerror" path="typeOfFlat"></form:errors>
 		<p>Surface<form:input path="surface"/></p>
 		<p>Price<form:input path="price"/></p>
 		<p>Numer of Guests<form:input path="numberOfGuests"/></p>
-		<p>Description<form:textarea path="description"/></p>
+		<p>Description<form:textarea path="description"/></p><form:errors class = "formerror" path="description"></form:errors>
 		<p><input type="submit" /></p>
-		<form:errors></form:errors>
 		</form:form>
 	</c:otherwise>
 </c:choose>

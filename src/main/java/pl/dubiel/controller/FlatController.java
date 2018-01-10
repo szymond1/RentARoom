@@ -40,14 +40,17 @@ public class FlatController {
 	@PostMapping("/addoffer")
 	public String addOfferPost(@Valid @ModelAttribute Flat flat, BindingResult bindingResult, Model m) {
 		if (bindingResult.hasErrors()) {
-			return "redirect:/flat/addoffer";
+			//return "redirect:/flat/addoffer";
+			return "addoffer";
 		}
+		
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
 		flat.setUser(u);
 		flat.setCreated(new Date());
 		this.flatrepo.save(flat);
 		return "redirect:/";
+		
 	}
 	
 	@GetMapping("/{id}")
