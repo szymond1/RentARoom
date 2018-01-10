@@ -1,5 +1,6 @@
 package pl.dubiel.app;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -15,11 +16,13 @@ public class AppInitializer implements WebApplicationInitializer {
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
 		ctx.register(AppConfig.class);
 		ctx.setServletContext(container);
-
+		ctx.refresh();
 		ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(ctx));
-
 		servlet.setLoadOnStartup(1);
 		servlet.addMapping("/");
-
+	    servlet.setMultipartConfig(ctx.getBean(MultipartConfigElement.class));
 	}
 }
+
+      
+ 
