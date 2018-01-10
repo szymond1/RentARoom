@@ -53,9 +53,41 @@ public class FlatController {
 	@GetMapping("/{id}")
 	public String particularFlat(Model m, @PathVariable long id) {
 		Flat flat = flatrepo.findOne(id);
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		m.addAttribute("user", u);
 		m.addAttribute("flat", flat);
 		return "single_flat";
 	}
+	
+	@GetMapping("/edit/{id}")
+	public String editFlat(@PathVariable long id, Model m) {
+		Flat f = this.flatrepo.findOne(id);
+		m.addAttribute("flat", f);
+		return "editoffer";
+	}
+	
+	@PostMapping("/edit/{id}")
+	public String editFlatPost(@Valid @ModelAttribute Flat f,BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "editoffer";
+		}
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		f.setUser(u);
+		f.setCreated(new Date());
+		this.flatrepo.save(f);
+		return "redirect:/";
+	}
+	
+
+	@GetMapping("/delete/{id}")
+	public String deleteBook(@PathVariable long id) {
+		this.flatrepo.delete(id);
+		return "redirect:/";
+
+	}
+	
 	
 	@ModelAttribute("voivodeship")
 	public List<String> getVoivodeship() {

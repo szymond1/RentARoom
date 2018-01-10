@@ -30,8 +30,18 @@
 	<p>Description: ${flat.description}</p>
 	<p>Author: ${flat.user.userName}</p>
 	<p>Contact: ${flat.user.email}</p>
+
+	<c:if test="${user.userName eq flat.user.userName}">
+	
+	<form action="/RentaRoom/flat/edit/${flat.id}"><button type="submit">Edit offer</button></form>
+	<form action="/RentaRoom/flat/delete/${flat.id}"><button type="submit">Delete offer</button></form>
+	<!--  <p><a href = "/RentaRoom/flat/edit/${flat.id}">Edit offer</a>
+	
+	 <a href = "/RentaRoom/flat/delete/${flat.id}">Delete offer</a></p>-->
+	</c:if>
 <hr>
 </div>
+
 
 
 <!-- END MAIN -->
