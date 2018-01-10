@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -54,6 +55,60 @@ public class UserController {
 		this.userrepo.save(user);
 		return "redirect:/";
 	}
+	
+	@GetMapping("/accountOpt")
+	public String accountOpt(Model m) {
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		m.addAttribute("user", u);
+		return "accountOpt";
+	}
+	
+	@PostMapping("/accountOpt")
+	public String accountOptPost(@Valid @ModelAttribute User user, BindingResult bindingResult, Model m) {
+		if (bindingResult.hasErrors()) {
+			return "redirect:/accountOpt";
+		}
+		
+//		List<User> users = this.userrepo.findAll();
+//		for (User u : users) {
+//			if (u.getEmail().equals(user.getEmail())) {
+//				m.addAttribute("msg", "This email address is already used. Try different email.");
+//				return "accountOpt";
+//			}
+//			if (u.getUserName().equals(user.getUserName())) {
+//				m.addAttribute("msg1", "This username is already used. Try different username.");
+//				return "accountOpt";
+//			}
+//		}
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		user.setId(u.getId());
+		this.userrepo.save(user);
+		return "redirect:/";
+	}
+	
+	
+	@GetMapping("/delete")
+	public String delete(Model m) {
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		m.addAttribute("user", u);
+		return "delete";
+	}
+	
+	@GetMapping("/delete/{decision}")
+	public String deletePost(@PathVariable int decision) {
+	if (decision == 1) {
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		s.invalidate();
+		this.userrepo.delete(u);
+		return "redirect:/login";
+		}
+		return "redirect:/";
+	}
+	
 	
 	@GetMapping("/login")
 		public String login(Model m) {

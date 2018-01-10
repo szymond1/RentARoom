@@ -13,6 +13,7 @@ public interface FlatRepository extends JpaRepository<Flat, Long> {
 
 	List<Flat> findByUserId(Long id);
 	List<Flat> findByUserIdOrderByCreatedDesc(Long id);
+	Flat findFirstByUserId(Long id);
 	@Query("SELECT f FROM Flat f ORDER BY f.created DESC")
 	List<Flat> findAllOrder();
 }
