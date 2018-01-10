@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.dubiel.bean.SessionManager;
+import pl.dubiel.entity.Comment;
 import pl.dubiel.entity.Flat;
 import pl.dubiel.entity.User;
+import pl.dubiel.repository.CommentRepository;
 import pl.dubiel.repository.FlatRepository;
 
 @Controller
@@ -30,6 +33,9 @@ public class FlatController {
 
 	@Autowired
 	FlatRepository flatrepo;
+	
+	@Autowired
+	CommentRepository comrepo;
 
 	@GetMapping("/addoffer")
 	public String addOffer(Model m) {
@@ -58,10 +64,30 @@ public class FlatController {
 		Flat flat = flatrepo.findOne(id);
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
+		List<Comment> comments = comrepo.findByFlatIdOrderByCreatedAsc(id);
+
 		m.addAttribute("user", u);
 		m.addAttribute("flat", flat);
+		m.addAttribute("comments", comments);
+		m.addAttribute("comment", new Comment());
 		return "single_flat";
 	}
+	
+	@PostMapping("/addComment/{flatId}")
+	public String addPost(@Valid @ModelAttribute Comment comment, BindingResult bindingResult, @PathVariable long flatId) {
+		if (bindingResult.hasErrors()) {
+			return "redirect:/flat/" + flatId;
+		}
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		Flat flat = this.flatrepo.findOne(flatId);
+		comment.setFlat(flat);
+		comment.setUser(u);
+		comment.setCreated(new Date());
+		this.comrepo.save(comment);
+		return "redirect:/flat/" + flatId;
+	}
+	
 	
 	@GetMapping("/edit/{id}")
 	public String editFlat(@PathVariable long id, Model m) {

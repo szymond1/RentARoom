@@ -1,16 +1,23 @@
 package pl.dubiel.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+
 
 @Entity
 public class Flat {
@@ -46,6 +53,9 @@ public class Flat {
 	private int numberOfGuests;
 	@NotEmpty
 	private String description;
+	
+	@OneToMany(mappedBy = "flat", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Comment> comment = new ArrayList<>();
 	
 	public Flat() {
 		super();
@@ -147,8 +157,18 @@ public class Flat {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public List<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
 	
-	
+	public int getCommentSize() {
+		return this.comment.size();
+	}
 	
 	
 }
