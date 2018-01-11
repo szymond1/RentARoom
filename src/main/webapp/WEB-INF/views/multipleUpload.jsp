@@ -24,6 +24,7 @@
 	Log first if you want to add new offer!
 	</c:when>
 	<c:otherwise>
+	${eMessage}
 	 <h1> Multiple File Upload </h1>
 	<form:form method="post" modelAttribute="photos" enctype="multipart/form-data">
 		<p>Upload Files: <input multiple type="file" name="photo"></p>

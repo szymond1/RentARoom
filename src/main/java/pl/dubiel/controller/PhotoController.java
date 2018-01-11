@@ -55,7 +55,7 @@ public class PhotoController {
 
 	@PostMapping("/add/photos/{id}")
 	public String addOfferPost(@ModelAttribute Photos p, @RequestParam("photo") MultipartFile[] files,
-			@PathVariable Long id) {
+			@PathVariable Long id, Model m) {
 
 		Flat flat = this.flatrepo.findFirstById(id);
 		String fileName = null;
@@ -67,10 +67,13 @@ public class PhotoController {
 			newPhoto.setUrl(null);
 			newPhoto.setCreated(new Date());
 			this.phrepo.save(newPhoto);
-			Random r = new Random();
-			int num = r.nextInt(500);
-			fileName = "room" + newPhoto.getId() + "_" + num + "_" + files[i].getOriginalFilename();
+
 			try {
+				Random r =new Random();
+				int num = r.nextInt(500);
+				String extension = FilenameUtils.getExtension(files[i].getOriginalFilename());
+				if (extension.equals("jpg") || extension.equals("jpeg")) {
+					fileName = "room_"+num+"_" + newPhoto.getId() + "." + extension;
 				byte[] bytes = files[i].getBytes();
 				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(new File(
 						"/home/szymon/Pulpit/RentaRoom/src/main/webapp/WEB-INF/resources/picture/" + fileName)));
@@ -79,6 +82,10 @@ public class PhotoController {
 				newPhoto.setUrl(fileName);
 				this.phrepo.save(newPhoto);
 				msg += "You have successfully uploaded " + fileName + "<br/>";
+				} else {
+					m.addAttribute("errorMessage", "Niepoprawny format pliku graficznego.");
+					return "redirect:/add/photos/{id}";
+				}
 			} catch (Exception e) {
 				return "redirect:/";
 			}

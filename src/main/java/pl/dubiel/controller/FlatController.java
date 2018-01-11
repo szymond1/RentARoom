@@ -31,9 +31,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.dubiel.bean.SessionManager;
 import pl.dubiel.entity.Comment;
 import pl.dubiel.entity.Flat;
+import pl.dubiel.entity.Photos;
 import pl.dubiel.entity.User;
 import pl.dubiel.repository.CommentRepository;
 import pl.dubiel.repository.FlatRepository;
+import pl.dubiel.repository.PhotosRepository;
 
 @Controller
 @RequestMapping("/flat")
@@ -44,6 +46,9 @@ public class FlatController {
 
 	@Autowired
 	CommentRepository comrepo;
+	
+	@Autowired
+	PhotosRepository phrepo;
 
 	@GetMapping("/addoffer")
 	public String addOffer(Model m) {
@@ -89,7 +94,7 @@ public class FlatController {
 					return "redirect:/";
 
 				} else {
-					m.addAttribute("errorMessage", "Niepoprawny format pliku graficznego.");
+					m.addAttribute("eMessage", "Niepoprawny format pliku graficznego.");
 					return "redirect:/addoffer";
 				}
 
@@ -98,7 +103,7 @@ public class FlatController {
 			}
 		}
 
-		m.addAttribute("errorMessage", "Brak zdjęcia.");
+		m.addAttribute("eMessage", "Brak zdjęcia.");
 		return "addoffer";
 
 	}
@@ -109,10 +114,11 @@ public class FlatController {
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
 		List<Comment> comments = comrepo.findByFlatIdOrderByCreatedAsc(id);
-
+		List<Photos> photos =phrepo.findByFlatId(id);
 		m.addAttribute("user", u);
 		m.addAttribute("flat", flat);
 		m.addAttribute("comments", comments);
+		m.addAttribute("photos", photos);
 		m.addAttribute("comment", new Comment());
 		return "single_flat";
 	}

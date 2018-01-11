@@ -37,8 +37,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	@Bean
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize("12800KB");
-        factory.setMaxRequestSize("12800KB");
+        factory.setMaxFileSize("12800000KB");
+        factory.setMaxRequestSize("12800000KB");
         return factory.createMultipartConfig();
     }
 

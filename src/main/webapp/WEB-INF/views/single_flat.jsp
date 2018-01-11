@@ -21,6 +21,7 @@
 	</c:when>
 	<c:otherwise>
 <div>
+
 	<p>Localization: ${flat.postCode} ${flat.city} , ulica: ${flat.street} , wojewodztwo ${flat.voivodeship}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
 	<p>Surface: ${flat.surface}</p>
@@ -29,7 +30,13 @@
 	<p>Description: ${flat.description}</p>
 	<p>Author: ${flat.user.userName}</p><form action = "/RentaRoom/userFlats/${flat.user.id}"><button type="submit">Check all offers</button></form>
 	<p>Contact: ${flat.user.email}</p>	
-	
+
+${photo.url}
+
+	<c:forEach items="${photos}" var="photo">
+	<p><img src="//localhost:8080/RentaRoom/resources/picture/${photo.url}" width="300" height="250"/></p>
+	</c:forEach>
+</div>
 	<c:if test="${user.userName eq flat.user.userName}">
 	<form action="/RentaRoom/add/photos/${flat.id}"><button type="submit">Add new photos</button></form>
 	<form action="/RentaRoom/flat/edit/${flat.id}"><button type="submit">Edit offer</button></form>
