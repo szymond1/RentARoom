@@ -69,6 +69,15 @@ public class MessageController {
 		return "redirect:/message";
 	}
 	
+	@GetMapping("/details/{id}")
+	public String messageDetails(Model m, @PathVariable long id) {
+		Message message = this.mrepo.findOne(id);
+		message.setChecked(1);
+		this.mrepo.save(message);
+		m.addAttribute("message", message);
+		return "mess/read_message";
+	}
+	
 	@ModelAttribute("userMessages")
 	public List<Message> getMessages() {
 		HttpSession s = SessionManager.session();
@@ -76,6 +85,20 @@ public class MessageController {
 		return this.mrepo.findByRecieverOrderByCreatedDesc(u);
 	}
 
+	@ModelAttribute("readMessages")
+	public List<Message> getReadMessages() {
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		return this.mrepo.findByRecieverAndCheckedLikeOrderByCreatedDesc(u, 1);
+	}
+	
+	@ModelAttribute("unreadMessages")
+	public List<Message> getUnreadMessages() {
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		return this.mrepo.findByRecieverAndCheckedLikeOrderByCreatedDesc(u, 0);
+	}
+	
 	@ModelAttribute("sentMessages")
 	public List<Message> getSentMessages() {
 		HttpSession s = SessionManager.session();

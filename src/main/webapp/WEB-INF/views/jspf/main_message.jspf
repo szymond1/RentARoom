@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
     <%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
     <%@ page session="true" %>
 
  
@@ -17,15 +18,23 @@
 		Baza miliona ofert mieszkań, domów i pokoi do wynajęcia.
 		<p><b>Zaloguj się</b>, by czerpać korzysci uzytkowania portalu</p> 
 			
-	</c:when>
+</c:when>
 
-	<c:otherwise>
-	<h3>Messages you recieved:</h3>
+<c:otherwise>
+<h3>Messages you recieved:</h3>
 
-<c:forEach items="${userMessages}" var="message">
-<p>${message.text}</p>
-<p>${message.created}</p>
-<p>${message.sender.userName}</p>
+<h4>Unread messages:</h4>
+<c:forEach items="${unreadMessages}" var="message">
+<c:set var = "full" value = "${message.text}"></c:set>
+<c:set var = "part" value = "${fn:substring(full, 0, 30) }"></c:set>
+<p>${part }... <br /> message from:<a href ="/RentaRoom/userFlats/${message.sender.id}">${message.sender.userName}</a>, sent: ${message.created} <a href="message/details/${message.id}">read message</a></p>
+</c:forEach>
+
+<h4>Read messages:</h4>
+<c:forEach items="${readMessages}" var="message">
+<c:set var = "full" value = "${message.text}"></c:set>
+<c:set var = "part" value = "${fn:substring(full, 0, 30) }"></c:set>
+<p>${part }... <br /> message from:<a href ="/RentaRoom/userFlats/${message.sender.id}">${message.sender.userName}</a>, sent: ${message.created} <a href="message/details/${message.id}">read message</a></p>
 </c:forEach>
 
 <h3>Messages you sent:</h3>
@@ -33,7 +42,7 @@
 <c:forEach items="${sentMessages}" var="message">
 <p>${message.text}</p>
 <p>${message.created}</p>
-<p>${message.reciever.userName}</p>
+<p><a href ="/RentaRoom/userFlats/${comment.receiver.id}">${message.reciever.userName}</a></p>
 </c:forEach>
 	
 	<!-- Pagination -->
