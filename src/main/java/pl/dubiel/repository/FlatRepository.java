@@ -12,6 +12,7 @@ import pl.dubiel.entity.User;
 public interface FlatRepository extends JpaRepository<Flat, Long> {
 
 	List<Flat> findByUserId(Long id);
+	Flat findFirstById(Long id);
 	List<Flat> findByUserIdOrderByCreatedDesc(Long id);
 	Flat findFirstByUserId(Long id);
 	@Query("SELECT f FROM Flat f ORDER BY f.created DESC")

@@ -9,9 +9,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.dubiel.bean.SessionManager;
 import pl.dubiel.entity.Comment;
@@ -50,7 +53,7 @@ public class FlatController {
 
 	@PostMapping("/addoffer")
 	public String addOfferPost(@Valid @ModelAttribute Flat flat, BindingResult bindingResult,
-			@RequestParam("photo") MultipartFile file) {
+			@RequestParam("photo") MultipartFile file, RedirectAttributes ra, Model m) {
 		if (bindingResult.hasErrors()) {
 			// return "redirect:/flat/addoffer";
 			return "addoffer";
@@ -60,28 +63,43 @@ public class FlatController {
 		User u = (User) s.getAttribute("user");
 		flat.setUser(u);
 		flat.setCreated(new Date());
+		flat.setPhoto(null);
 		String fileName = null;
+		this.flatrepo.save(flat);
+		Long imgId = flat.getId();
 		if (!file.isEmpty()) {
 			try {
-				Random r = new Random();
-				int num = r.nextInt(500);
-				Random r1 = new Random();
-				int num1 = r1.nextInt(500);
-				fileName = "room"+num+"_"+num1+ file.getOriginalFilename();
-				byte[] bytes = file.getBytes();
-				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(new File(
-						"/home/szymon/Pulpit/RentaRoom/src/main/webapp/WEB-INF/resources/picture/" + fileName)));
-				buffStream.write(bytes);
-				buffStream.close();
-				flat.setPhoto(fileName);
-				this.flatrepo.save(flat);
-				return "redirect:/";
+
+				String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+				if (extension.equals("jpg") || extension.equals("jpeg")) {
+
+					fileName = "flat_" + imgId + "." + extension;
+					byte[] bytes = file.getBytes();
+					BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(new File(
+							// TODO :: absolute - path & check after deployment without eclipse
+							// "./../../../../webapp/WEB-INF/resources/picture/" + fileName)));
+							"/home/szymon/Pulpit/RentaRoom/src/main/webapp/WEB-INF/resources/picture/" + fileName)));
+					buffStream.write(bytes);
+					buffStream.close();
+					// seter dla url
+					flat.setPhoto(fileName);
+					// zapis db
+					this.flatrepo.save(flat);
+					m.addAttribute("message", "Dodano produkt do bazy.");
+					return "redirect:/";
+
+				} else {
+					m.addAttribute("errorMessage", "Niepoprawny format pliku graficznego.");
+					return "redirect:/addoffer";
+				}
+
 			} catch (Exception e) {
-				return "redirect:/";
+				return "home";
 			}
 		}
-		this.flatrepo.save(flat);
-		return "redirect:/";
+
+		m.addAttribute("errorMessage", "Brak zdjęcia.");
+		return "addoffer";
 
 	}
 
@@ -101,7 +119,7 @@ public class FlatController {
 
 	@PostMapping("/addComment/{flatId}")
 	public String addPost(@Valid @ModelAttribute Comment comment, BindingResult bindingResult,
-			@PathVariable long flatId) {
+			@PathVariable long flatId, RedirectAttributes ra) {
 		if (bindingResult.hasErrors()) {
 			return "redirect:/flat/" + flatId;
 		}
@@ -124,7 +142,7 @@ public class FlatController {
 
 	@PostMapping("/edit/{id}")
 	public String editFlatPost(@Valid @ModelAttribute Flat flat, BindingResult bindingResult,
-			@RequestParam("photo") MultipartFile file) {
+			@RequestParam("photo") MultipartFile file, RedirectAttributes ra) {
 		if (bindingResult.hasErrors()) {
 			return "editoffer";
 		}
@@ -139,7 +157,7 @@ public class FlatController {
 				int num = r.nextInt(500);
 				Random r1 = new Random();
 				int num1 = r1.nextInt(500);
-				fileName = "room"+num+"_"+num1+ file.getOriginalFilename();
+				fileName = "room" + num + "_" + num1 + file.getOriginalFilename();
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(new File(
 						"/home/szymon/Pulpit/RentaRoom/src/main/webapp/WEB-INF/resources/picture/" + fileName)));
@@ -157,7 +175,7 @@ public class FlatController {
 	}
 
 	@GetMapping("/delete/{id}")
-	public String deleteBook(@PathVariable long id) {
+	public String deleteBook(@PathVariable long id, RedirectAttributes ra) {
 		this.flatrepo.delete(id);
 		return "redirect:/";
 

@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <%@ include file = "jspf/head_config.jspf" %>
+
 </head>
 <body>
 <%@ include file = "jspf/header.jspf" %>
@@ -30,7 +31,7 @@
 	<p>Contact: ${flat.user.email}</p>	
 	
 	<c:if test="${user.userName eq flat.user.userName}">
-	<form action="/RentaRoom/flat/edit/${flat.id}"><button type="submit">Edit offer</button></form>
+	<form action="/RentaRoom/add/photos/${flat.id}"><button type="submit">Add new photos</button></form>
 	<form action="/RentaRoom/flat/edit/${flat.id}"><button type="submit">Edit offer</button></form>
 	<form action="/RentaRoom/flat/delete/${flat.id}"><button type="submit">Delete offer</button></form>
 	<!--  <p><a href = "/RentaRoom/flat/edit/${flat.id}">Edit offer</a>

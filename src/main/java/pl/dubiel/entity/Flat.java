@@ -59,6 +59,9 @@ public class Flat {
 	@OneToMany(mappedBy = "flat", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Comment> comment = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "flat",cascade = CascadeType.ALL)
+	private List<Photos> photos = new ArrayList<>();
+	
 	public Flat() {
 		super();
 		this.created = new Date();
