@@ -30,6 +30,9 @@
 	<p>Max number of guests: ${flat.numberOfGuests}</p>
 	<p>Description: ${flat.description}</p>
 	<p>Author: ${flat.user.userName}</p><form action = "/RentaRoom/userFlats/${flat.user.id}"><button type="submit">Check all offers</button></form>
+	<c:if test="${user.userName != flat.user.userName}">
+	<a href="/RentaRoom/message/${flat.user.id}">Send message</a></p>
+	</c:if>
 	<p>Contact: ${flat.user.email}</p>	
 
 ${photo.url}

@@ -14,9 +14,16 @@
 <%@ include file = "jspf/header.jspf" %>
 <%@ include file = "jspf/main_menu.jspf" %>
 <div class="w3-main" style="margin-left:250px">
-
+<c:choose>
+	<c:when test="${sessionScope.user == null}">
+	Log first if you want to add new offer!
+	</c:when>
+	<c:otherwise>
+	
 <%@ include file = "jspf/userId_page.jspf" %>
 <!-- END MAIN -->
+</c:otherwise>
+</c:choose>
 </div>
 <%@ include file = "jspf/footer.jspf" %>
 </body>

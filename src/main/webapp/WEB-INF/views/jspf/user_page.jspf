@@ -6,6 +6,7 @@
 
 <p class = allOffers> Offers by user: ${user.userName}</p>
 
+
 <c:choose>
 <c:when test="${empty userFlats}">
 	Nie znaleziono zadnych ofert
@@ -23,7 +24,7 @@
 	<p><a href="flat/${flat.id}">Show more..</a></p>
 </div>
 	<div class = "div2">
-	<p><img src="//localhost:8080/RentaRoom/resources/picture/${flat.photo}" width="300" height="250"/></p>
+	<p><img src="${pageContext.request.contextPath}/resources/picture/${flat.photo}" width="300" height="250"/></p>
 	</div>
 	<br/>
 	<hr>

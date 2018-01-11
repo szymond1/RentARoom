@@ -5,6 +5,7 @@
     <%@ page session="true" %>
 
 <p class = allOffers> Offers by user: ${flat.user.userName}</p>
+<a href="/RentaRoom/message/${flat.user.id}">Send message</a></p>
 
 <c:choose>
 <c:when test="${empty userFlats}">

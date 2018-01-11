@@ -6,25 +6,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<%@ include file = "jspf/head_config.jspf" %>
+<%@ include file = "../jspf/head_config.jspf" %>
 
 </head>
 <body>
-<%@ include file = "jspf/header.jspf" %>
-<%@ include file = "jspf/main_menu.jspf" %>
+<%@ include file = "../jspf/header.jspf" %>
+<%@ include file = "../jspf/main_menu.jspf" %>
 <div class="w3-main" style="margin-left:250px">
-<c:choose>
-	<c:when test="${sessionScope.user == null}">
-	Log first if you want to add new offer!
-	</c:when>
-	<c:otherwise>
-<%@ include file = "jspf/user_page.jspf" %>
+
+<%@ include file = "../jspf/add_message.jspf" %>
 <!-- END MAIN -->
-	</c:otherwise>
-</c:choose>
-
 </div>
-
-<%@ include file = "jspf/footer.jspf" %>
+<%@ include file = "../jspf/footer.jspf" %>
 </body>
 </html>
