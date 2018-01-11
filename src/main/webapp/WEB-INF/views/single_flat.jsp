@@ -21,6 +21,7 @@
 	</c:when>
 	<c:otherwise>
 <div>
+	<p class ="flatName">Name: ${flat.name}</p>
 
 	<p>Localization: ${flat.postCode} ${flat.city} , ulica: ${flat.street} , wojewodztwo ${flat.voivodeship}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>

@@ -53,7 +53,7 @@ public class UserController {
 		}
 		
 		this.userrepo.save(user);
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/accountOpt")

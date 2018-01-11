@@ -25,7 +25,7 @@
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/">Home</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/user">My offers</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/flat/addoffer">Add offer</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">My messages</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/message">My messages</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="#">Szukaj noclegu</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/accountOpt">Account options</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="/RentaRoom/logout">Logout</a>

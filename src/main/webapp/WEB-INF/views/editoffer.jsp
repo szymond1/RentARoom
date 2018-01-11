@@ -26,6 +26,7 @@
 	</c:when>
 	<c:otherwise>
 		<form:form method="post" modelAttribute="flat" enctype="multipart/form-data">
+		<p>Name<form:input path="name"/></p><p class = "ferror"><form:errors path="name"></form:errors></p>
 		<p>Voivodeship<form:select items="${voivodeship}" path="voivodeship"/></p>
 		<p>Postal Code<form:input path="postCode"/></p><form:errors class = "formerror" path="postCode"></form:errors>
 		<p>City<form:input path="city"/></p><form:errors class = "formerror" path="city"></form:errors>

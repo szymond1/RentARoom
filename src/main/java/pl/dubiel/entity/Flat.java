@@ -26,6 +26,10 @@ public class Flat {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty
+	@Size(min = 3)
+	private String name;
+	
 	@ManyToOne
 	private User user;
 	
@@ -181,6 +185,22 @@ public class Flat {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public List<Photos> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photos> photos) {
+		this.photos = photos;
 	}
 	
 	

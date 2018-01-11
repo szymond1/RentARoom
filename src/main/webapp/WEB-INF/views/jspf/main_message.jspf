@@ -20,24 +20,21 @@
 	</c:when>
 
 	<c:otherwise>
-	<h1 class="w3-text-teal">Homepage</h1>
-	<p class = allOffers>All offers</p>
-	<c:forEach items="${availableFlats}" var="flat">
-	<div class = "div1">
-	<p class ="flatName"><b>Name: ${flat.name}</b></p>
-	<p>City: ${flat.city}</p>
-	<p>Type of Flat: ${flat.typeOfFlat}</p>
-	<p>Price: ${flat.price} zl</p>
-	<p>Created: ${flat.created}</p>
-	<p>Author: ${flat.user.userName}</p>
-	<p><a href="flat/${flat.id}">Show more..</a></p>
-	</div>
-	<div class = "div2">
-	<p><img src="//localhost:8080/RentaRoom/resources/picture/${flat.photo}" width="300" height="250"/></p>
-	</div>
-	<br/>
-	<hr>
-	</c:forEach>
+	<h3>Messages you recieved:</h3>
+
+<c:forEach items="${userMessages}" var="message">
+<p>${message.text}</p>
+<p>${message.created}</p>
+<p>${message.sender.userName}</p>
+</c:forEach>
+
+<h3>Messages you sent:</h3>
+
+<c:forEach items="${sentMessages}" var="message">
+<p>${message.text}</p>
+<p>${message.created}</p>
+<p>${message.reciever.userName}</p>
+</c:forEach>
 	
 	<!-- Pagination -->
   <div class="w3-center w3-padding-32">
