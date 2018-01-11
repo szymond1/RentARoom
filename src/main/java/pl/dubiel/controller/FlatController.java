@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -62,8 +63,11 @@ public class FlatController {
 		String fileName = null;
 		if (!file.isEmpty()) {
 			try {
-
-				fileName = "room_1_" + file.getOriginalFilename();
+				Random r = new Random();
+				int num = r.nextInt(500);
+				Random r1 = new Random();
+				int num1 = r1.nextInt(500);
+				fileName = "room"+num+"_"+num1+ file.getOriginalFilename();
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(new File(
 						"/home/szymon/Pulpit/RentaRoom/src/main/webapp/WEB-INF/resources/picture/" + fileName)));
@@ -131,8 +135,11 @@ public class FlatController {
 		String fileName = null;
 		if (!file.isEmpty()) {
 			try {
-
-				fileName = "room_1_" + file.getOriginalFilename();
+				Random r = new Random();
+				int num = r.nextInt(500);
+				Random r1 = new Random();
+				int num1 = r1.nextInt(500);
+				fileName = "room"+num+"_"+num1+ file.getOriginalFilename();
 				byte[] bytes = file.getBytes();
 				BufferedOutputStream buffStream = new BufferedOutputStream(new FileOutputStream(new File(
 						"/home/szymon/Pulpit/RentaRoom/src/main/webapp/WEB-INF/resources/picture/" + fileName)));
