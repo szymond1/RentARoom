@@ -38,6 +38,8 @@
 		<p>Upload File: <input type="file" name="photo"></p>
 		<p><input type="submit" /></p>
 		</form:form>
+	
+		
 	</c:otherwise>
 </c:choose>
 

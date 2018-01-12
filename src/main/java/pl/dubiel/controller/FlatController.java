@@ -198,9 +198,31 @@ public class FlatController {
 
 	@ModelAttribute("typeOfFlat")
 	public List<String> gettypeOfFlat() {
-		String typeOfFlat[] = new String[] { "Dom", "Mieszkanie", "Pokoj" };
+		String typeOfFlat[] = new String[] { "Dom", "Mieszkanie", "Pokoj", "Dom letniskowy" };
 		Arrays.sort(typeOfFlat);
 		return Arrays.asList(typeOfFlat);
 	}
 
+	@GetMapping("/search")
+	public String searchFlats(@RequestParam String name, @RequestParam String city,
+			@RequestParam(defaultValue="1") Double num1, @RequestParam(defaultValue="100000000") Double num2,
+			@RequestParam(defaultValue="1") int num3, @RequestParam(defaultValue="200") int num4,Model m) {
+		m.addAttribute("searchResult", this.flatrepo.findByGivenCityNameNumsGuests(name, city,num1, num2, num3, num4));
+		m.addAttribute("name", name);
+		m.addAttribute("city", city);
+		m.addAttribute("num1", num1);
+		m.addAttribute("num2", num2);
+		m.addAttribute("num3", num3);
+		m.addAttribute("num4", num4);
+		return "search";
+	}
+//	@GetMapping("/search0")
+//	public String searchFlats0(@RequestParam String search, Model m) {
+//		m.addAttribute("searchResult", this.flatrepo.findByGivenName(search));
+//		m.addAttribute("search", search);
+//		return "search";
+//	}
+	
+	
+	
 }

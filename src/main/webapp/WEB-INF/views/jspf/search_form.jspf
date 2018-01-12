@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+    <%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ page session="true" %>
+
+ 
+<c:choose>
+
+	<c:when test="${sessionScope.user == null}">		
+
+		<p>Holiday?</p>
+		<p>Bussiness trip?</p>
+		<p>Wanna plan your journey?</p>
+		
+		With us you will find your place wherever you want
+		A million database offers of flats, houses and rooms for rent.
+		<p><b>Log in</b>,  to enjoy all the benefits.</p> 
+			
+
+	</c:when>
+
+	<c:otherwise>
+	<p>		Wyszukiwarka noclegow </p>
+	
+	<div class="nav-item">
+		<form method="get" action="flat/search">
+		Nazwa<input type="text" name="name" placeholder="np.Willa"/>
+			Miasto<input type="text" name="city" placeholder="Krosno"/>
+			Cena od:<input type="number" name="num1" placeholder="1"/>
+			do:<input type="number" name="num2" placeholder="1"/>
+			Goscie od:<input type="number" name="num3" placeholder="1"/>
+			do:<input type="number" name="num4" placeholder="1"/>
+			<input type="submit" value="Szukaj" />
+		</form>
+</div>
+	
+	</c:otherwise>	
+</c:choose>
+ 

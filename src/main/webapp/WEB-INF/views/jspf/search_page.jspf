@@ -17,16 +17,13 @@
 		A million database offers of flats, houses and rooms for rent.
 		<p><b>Log in</b>,  to enjoy all the benefits.</p> 
 			
-	
-	
 
-	
 	</c:when>
 
 	<c:otherwise>
-
+	<h1 class="w3-text-teal">Search</h1>
 	<p class = allOffers>All offers</p>
-	<c:forEach items="${availableFlats}" var="flat">
+	<c:forEach items="${searchResult}" var="flat">
 	<div class = "div1">
 	<p class ="flatName"><b>Name: ${flat.name}</b></p>
 	<p>City: ${flat.city}</p>
@@ -34,7 +31,7 @@
 	<p>Price: ${flat.price} zl</p>
 	<p>Created: ${flat.created}</p>
 	<p>Author: ${flat.user.userName}</p>
-	<p><a href="flat/${flat.id}">Show more..</a></p>
+	<p><a href="${flat.id}">Show more..</a></p>
 	</div>
 	<div class = "div2">
 	<p><img src="//localhost:8080/RentaRoom/resources/picture/${flat.photo}" width="300" height="250"/></p>
