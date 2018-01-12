@@ -21,7 +21,7 @@
 </c:when>
 
 <c:otherwise>
-<h3>Messages you recieved:</h3>
+<h3>Received messages:</h3>
 
 <h4>Unread messages:</h4>
 <c:forEach items="${unreadMessages}" var="message">
@@ -37,7 +37,7 @@
 <p>${part }... <br /> message from:<a href ="/RentaRoom/userFlats/${message.sender.id}">${message.sender.userName}</a>, sent: ${message.created} <a href="message/details/${message.id}">read message</a></p>
 </c:forEach>
 
-<h3>Messages you sent:</h3>
+<h3>Sent messages:</h3>
 
 <c:forEach items="${sentMessages}" var="message">
 <p>${message.text}</p>

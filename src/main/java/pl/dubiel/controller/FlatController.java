@@ -76,7 +76,7 @@ public class FlatController {
 			try {
 
 				String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-				if (extension.equals("jpg") || extension.equals("jpeg")) {
+				if (extension.equals("jpg") || extension.equals("jpeg") || extension.equals("png")) {
 
 					fileName = "flat_" + imgId + "." + extension;
 					byte[] bytes = file.getBytes();

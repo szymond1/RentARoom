@@ -8,16 +8,6 @@
 <c:choose>
 
 	<c:when test="${sessionScope.user == null}">		
-
-		<p>Holiday?</p>
-		<p>Bussiness trip?</p>
-		<p>Wanna plan your journey?</p>
-		
-		With us you will find your place wherever you want
-		A million database offers of flats, houses and rooms for rent.
-		<p><b>Log in</b>,  to enjoy all the benefits.</p> 
-			
-
 	</c:when>
 
 	<c:otherwise>

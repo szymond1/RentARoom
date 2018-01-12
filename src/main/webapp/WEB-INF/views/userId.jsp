@@ -19,12 +19,13 @@
 	Log first if you want to add new offer!
 	</c:when>
 	<c:otherwise>
-	
 <%@ include file = "jspf/userId_page.jspf" %>
 <!-- END MAIN -->
-</c:otherwise>
+	</c:otherwise>
 </c:choose>
+
 </div>
+
 <%@ include file = "jspf/footer.jspf" %>
 </body>
 </html>

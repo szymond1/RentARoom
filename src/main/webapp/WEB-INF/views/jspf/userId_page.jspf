@@ -12,7 +12,9 @@
 	Nie znaleziono zadnych ofert
 </c:when>
 <c:otherwise>
+
 <c:forEach items="${userFlats}" var="flat">
+<div>
 <div class = "div1">
 	<p class ="flatName"><b>Name: ${flat.name}</b></p>
 	<p>City: ${flat.city}</p>
