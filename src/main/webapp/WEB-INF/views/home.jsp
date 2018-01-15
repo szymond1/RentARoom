@@ -19,6 +19,16 @@
 <%@ include file = "jspf/main_page.jspf" %>
 <!-- END MAIN -->
 </div>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+	</br>
+		
 <%@ include file = "jspf/footer.jspf" %>
 </body>
 </html>

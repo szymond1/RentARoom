@@ -10,39 +10,31 @@
 
 	<c:when test="${sessionScope.user == null}">		
 
-		<p>Wakacje?</p>
-		<p>Oczekiwanie na przesiadke?</p>
-		<p>A może wyjazd słuzbowy?</p>
-		
-		Z nami znajdziesz swoje miejsce, gdzie tylko zechcesz.
-		Baza miliona ofert mieszkań, domów i pokoi do wynajęcia.
-		<p><b>Zaloguj się</b>, by czerpać korzysci uzytkowania portalu</p> 
-			
 </c:when>
 
 <c:otherwise>
-<h3>Received messages:</h3>
+<h3>Your messages:</h3>
 
 <h4>Unread messages:</h4>
 <c:forEach items="${unreadMessages}" var="message">
 <c:set var = "full" value = "${message.text}"></c:set>
 <c:set var = "part" value = "${fn:substring(full, 0, 30) }"></c:set>
-<p>${part }... <br /> message from:<a href ="/RentaRoom/userFlats/${message.sender.id}">${message.sender.userName}</a>, sent: ${message.created} <a href="message/details/${message.id}">read message</a></p>
+<p class="speech-bubble">${part }...</p> message from:<a href ="/RentaRoom/userFlats/${message.sender.id}">${message.sender.userName}</a> - <a href="message/details/${message.id}">read message</a></p>
 </c:forEach>
 
 <h4>Read messages:</h4>
 <c:forEach items="${readMessages}" var="message">
 <c:set var = "full" value = "${message.text}"></c:set>
 <c:set var = "part" value = "${fn:substring(full, 0, 30) }"></c:set>
-<p>${part }... <br /> message from:<a href ="/RentaRoom/userFlats/${message.sender.id}">${message.sender.userName}</a>, sent: ${message.created} <a href="message/details/${message.id}">read message</a></p>
+<p class="speech-bubble">${part }...</p> message from:<a href ="/RentaRoom/userFlats/${message.sender.id}">${message.sender.userName}</a> - <a href="message/details/${message.id}">read message</a></p>
 </c:forEach>
 
 <h3>Sent messages:</h3>
 
 <c:forEach items="${sentMessages}" var="message">
-<p>${message.text}</p>
-<p>${message.created}</p>
-<p><a href ="/RentaRoom/userFlats/${comment.receiver.id}">${message.reciever.userName}</a></p>
+<c:set var = "full" value = "${message.text}"></c:set>
+<c:set var = "part" value = "${fn:substring(full, 0, 30) }"></c:set>
+<p class="speech-bubble">${part }...</p> message to:<a href ="/RentaRoom/userFlats/${message.reciever.id}">${message.reciever.userName}</a> - <a href="message/details/${message.id}">read message</a>
 </c:forEach>
 	
 	<!-- Pagination -->

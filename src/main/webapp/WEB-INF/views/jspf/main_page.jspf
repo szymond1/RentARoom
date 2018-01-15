@@ -4,7 +4,9 @@
     <%@	taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ page session="true" %>
 
- 
+ <br>
+<br>
+<br>
 <c:choose>
 
 	<c:when test="${sessionScope.user == null}">		
@@ -28,7 +30,7 @@
 	<p class = allOffers>All offers</p>
 	<c:forEach items="${availableFlats}" var="flat">
 	<div class = "div1">
-	<p class ="flatName"><b>Name: ${flat.name}</b></p>
+	<p class ="flatName"><b>${flat.name}</b></p>
 	<p>City: ${flat.city}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
 	<p>Price: ${flat.price} zl</p>

@@ -17,6 +17,12 @@
 				Message Text <form:textarea path="text" type="text" /><form:errors path="text"></form:errors><br />
 				<input type="submit" />
 			</form:form>
+			
+			<div class="container">  
+
+</div>
+			
+			
 		</c:otherwise>
 
 	</c:choose>

@@ -25,7 +25,7 @@
 	<p class = allOffers>All offers</p>
 	<c:forEach items="${searchResult}" var="flat">
 	<div class = "div1">
-	<p class ="flatName"><b>Name: ${flat.name}</b></p>
+	<p class ="flatName"><b>${flat.name}</b></p>
 	<p>City: ${flat.city}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
 	<p>Price: ${flat.price} zl</p>

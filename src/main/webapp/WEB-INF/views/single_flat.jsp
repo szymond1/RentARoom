@@ -20,8 +20,11 @@
 	Log first if you want to check offers!
 	</c:when>
 	<c:otherwise>
+	<br/>
+	<br/>
+	<br/>
 <div>
-	<p class ="flatName">Name: ${flat.name}</p>
+	<p class ="flatName">${flat.name}</p>
 
 	<p>Localization: ${flat.postCode} ${flat.city} , ulica: ${flat.street} , wojewodztwo ${flat.voivodeship}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
@@ -31,15 +34,23 @@
 	<p>Description: ${flat.description}</p>
 	<p>Author: ${flat.user.userName}</p><form action = "/RentaRoom/userFlats/${flat.user.id}"><button type="submit">Check all offers</button></form>
 	<c:if test="${user.userName != flat.user.userName}">
-	<a href="/RentaRoom/message/${flat.user.id}">Send message</a></p>
+	    <p>
+        <a href="/RentaRoom/message/${flat.user.id}" class="btn btn-info btn-lg">
+          <span class="glyphicon glyphicon-envelope"></span> Send message 
+        </a>
+      </p> 
+	
 	</c:if>
 	<p>Contact: ${flat.user.email}</p>	
 
 ${photo.url}
-
+	<div style="width:800; background-color:white; height:300px; overflow:auto;">
+	<div style="width: auto; height: auto;">
 	<c:forEach items="${photos}" var="photo">
-	<p><img src="//localhost:8080/RentaRoom/resources/picture/${photo.url}" width="300" height="250"/></p>
+	<img src="//localhost:8080/RentaRoom/resources/picture/${photo.url}" width="300" height="250"/>
 	</c:forEach>
+	</div>
+	</div>
 </div>
 	<c:if test="${user.userName eq flat.user.userName}">
 	<form action="/RentaRoom/add/photos/${flat.id}"><button type="submit">Add new photos</button></form>
@@ -48,11 +59,11 @@ ${photo.url}
 	<!--  <p><a href = "/RentaRoom/flat/edit/${flat.id}">Edit offer</a>
 	 <a href = "/RentaRoom/flat/delete/${flat.id}">Delete offer</a></p>-->
 	</c:if>
-	<div style = "color:blue">
+	<div>
 	<p class = "comments"> Comments</p>
 	<c:forEach items="${comments}" var="comment">
-	<p>${comment.created}</p>
-	<p><a href ="/RentaRoom/userFlats/${comment.user.id}">${comment.user.userName}</a>: ${comment.text}</p>
+	<span><a href ="/RentaRoom/userFlats/${comment.user.id}">${comment.user.userName}</a></span>
+	<span>${comment.created}:<p class="speech-bubble">${comment.text}...</p> </span>
 	</c:forEach>
 	</div>
 	<form:form action="addComment/${flat.id}"  method="post" modelAttribute="comment">
