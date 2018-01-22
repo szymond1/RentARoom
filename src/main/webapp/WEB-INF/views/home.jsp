@@ -12,6 +12,8 @@
 </head>
 <body>
 <%@ include file = "jspf/header.jspf" %>
+
+<br/>
 <%@ include file = "jspf/main_menu.jspf" %>
 <div class="w3-main" style="margin-left:250px">
 

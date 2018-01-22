@@ -36,7 +36,7 @@ public class UserController {
 @GetMapping("/register")
 	public String register(Model m) {
 		m.addAttribute("user", new User());
-		return "register";
+		return "account/register";
 	}
 	
 	@PostMapping("/register")
@@ -49,11 +49,11 @@ public class UserController {
 		for (User u : users) {
 			if (u.getEmail().equals(user.getEmail())) {
 				m.addAttribute("msg", "This email address is already used. Try different email.");
-				return "register";
+				return "account/register";
 			}
 			if (u.getUserName().equals(user.getUserName())) {
 				m.addAttribute("msg1", "This username is already used. Try different username.");
-				return "register";
+				return "account/register";
 			}
 		}
 		
@@ -66,7 +66,7 @@ public class UserController {
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
 		m.addAttribute("user", u);
-		return "accountOpt";
+		return "account/accountOpt";
 	}
 	
 	@PostMapping("/accountOpt")
@@ -99,7 +99,7 @@ public class UserController {
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
 		m.addAttribute("user", u);
-		return "delete";
+		return "account/delete";
 	}
 	
 	@GetMapping("/delete/{decision}")
@@ -122,7 +122,7 @@ public class UserController {
 	@GetMapping("/login")
 		public String login(Model m) {
 			m.addAttribute("loginData", new LoginData());
-			return "login";
+			return "account/login";
 		}
 	
 		@PostMapping("/login")
@@ -135,7 +135,7 @@ public class UserController {
 					return "redirect:/";
 			}
 			m.addAttribute("msg", "Invalid username or password");
-			return "login";
+			return "account/login";
 		}
 		
 		@GetMapping("/logout")

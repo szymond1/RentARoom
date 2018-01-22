@@ -19,6 +19,7 @@
 	<c:when test="${sessionScope.user == null}">
 	Log first if you want to check offers!
 	</c:when>
+	
 	<c:otherwise>
 	<br/>
 	<br/>

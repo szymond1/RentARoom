@@ -32,10 +32,12 @@ import pl.dubiel.bean.SessionManager;
 import pl.dubiel.entity.Comment;
 import pl.dubiel.entity.Flat;
 import pl.dubiel.entity.Photos;
+import pl.dubiel.entity.Rating;
 import pl.dubiel.entity.User;
 import pl.dubiel.repository.CommentRepository;
 import pl.dubiel.repository.FlatRepository;
 import pl.dubiel.repository.PhotosRepository;
+import pl.dubiel.repository.RatingRepository;
 
 @Controller
 @RequestMapping("/flat")
@@ -49,6 +51,9 @@ public class FlatController {
 	
 	@Autowired
 	PhotosRepository phrepo;
+	
+	@Autowired
+	RatingRepository ratingrepo;
 
 	@GetMapping("/addoffer")
 	public String addOffer(Model m) {
@@ -123,21 +128,6 @@ public class FlatController {
 		return "single_flat";
 	}
 
-	@PostMapping("/addComment/{flatId}")
-	public String addPost(@Valid @ModelAttribute Comment comment, BindingResult bindingResult,
-			@PathVariable long flatId, RedirectAttributes ra) {
-		if (bindingResult.hasErrors()) {
-			return "redirect:/flat/" + flatId;
-		}
-		HttpSession s = SessionManager.session();
-		User u = (User) s.getAttribute("user");
-		Flat flat = this.flatrepo.findOne(flatId);
-		comment.setFlat(flat);
-		comment.setUser(u);
-		comment.setCreated(new Date());
-		this.comrepo.save(comment);
-		return "redirect:/flat/" + flatId;
-	}
 
 	@GetMapping("/edit/{id}")
 	public String editFlat(@PathVariable long id, Model m) {
@@ -187,6 +177,44 @@ public class FlatController {
 
 	}
 
+	@PostMapping("/addComment/{flatId}")
+	public String addPost(@Valid @ModelAttribute Comment comment, BindingResult bindingResult,
+			@PathVariable long flatId, RedirectAttributes ra) {
+		if (bindingResult.hasErrors()) {
+			return "redirect:/flat/" + flatId;
+		}
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		Flat flat = this.flatrepo.findOne(flatId);
+		comment.setFlat(flat);
+		comment.setUser(u);
+		comment.setCreated(new Date());
+		this.comrepo.save(comment);
+		return "redirect:/flat/" + flatId;
+	}
+	
+	@GetMapping("/addRating/{id}")
+	public String addRate(Model m) {
+		m.addAttribute("rating", new Rating());
+		return "addRate";
+	}
+	
+	@PostMapping("/addRating/{id}")
+	public String addRateForm(@Valid @ModelAttribute Rating rating, BindingResult bindingResult, @PathVariable long id,Model m) {
+		if (bindingResult.hasErrors()) {
+			return "redirect:/addRating/{id}";
+		}
+		HttpSession s = SessionManager.session();
+		User u = (User) s.getAttribute("user");
+		Flat flat = this.flatrepo.findFirstById(id);
+		rating.setUser(u);
+		rating.setFlat(flat);
+		this.ratingrepo.save(rating);
+		return "redirect:/flat/" + id;
+	}
+	
+	
+	
 	@ModelAttribute("voivodeship")
 	public List<String> getVoivodeship() {
 		String voivo[] = new String[] { "Podkarpackie", "Malopolskie", "Swietokrzyskie", "Slaskie", "Opolskie",

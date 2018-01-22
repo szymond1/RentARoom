@@ -48,6 +48,9 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Comment> comment = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<Rating> rating = new ArrayList<>();
 
 	public User() {
 		super();
@@ -119,6 +122,14 @@ public class User {
 
 	public void setReceiver(List<User> receiver) {
 		this.receiver = receiver;
+	}
+
+	public List<Rating> getRating() {
+		return rating;
+	}
+
+	public void setRating(List<Rating> rating) {
+		this.rating = rating;
 	}
 
 

@@ -63,6 +63,9 @@ public class Flat {
 	@OneToMany(mappedBy = "flat", cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Comment> comment = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "rating", cascade = CascadeType.ALL, orphanRemoval=true)
+	private List<Rating> rating = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "flat",cascade = CascadeType.ALL)
 	private List<Photos> photos = new ArrayList<>();
 	
@@ -201,6 +204,14 @@ public class Flat {
 
 	public void setPhotos(List<Photos> photos) {
 		this.photos = photos;
+	}
+
+	public List<Rating> getRating() {
+		return rating;
+	}
+
+	public void setRating(List<Rating> rating) {
+		this.rating = rating;
 	}
 	
 	

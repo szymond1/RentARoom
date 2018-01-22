@@ -7,11 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<%@ include file = "jspf/head_config.jspf" %>
+<%@ include file = "../jspf/head_config.jspf" %>
 </head>
 <body>
-<%@ include file = "jspf/header.jspf" %>
-<%@ include file = "jspf/main_menu.jspf" %>
+<%@ include file = "../jspf/header.jspf" %>
+<%@ include file = "../jspf/main_menu.jspf" %>
 
 <div class="w3-main" style="margin-left:250px">
 
@@ -30,7 +30,7 @@
 	</c:choose>
 
 <!-- END MAIN -->
-<%@ include file = "jspf/footer.jspf" %>
+<%@ include file = "../jspf/footer.jspf" %>
 </div>
 </body>
 </html>
