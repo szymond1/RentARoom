@@ -9,7 +9,7 @@ import pl.dubiel.entity.Message;
 import pl.dubiel.entity.User;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
-
+	
 	List<Message> findByRecieverIdOrderByCreatedDesc(long id);
 	List<Message> findByRecieverOrderByCreatedDesc(User reciever);
 	List<Message> findBySenderOrderByCreatedDesc(User sender);

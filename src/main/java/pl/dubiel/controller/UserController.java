@@ -18,7 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.dubiel.bean.LoginData;
 import pl.dubiel.bean.SessionManager;
+import pl.dubiel.entity.Message;
 import pl.dubiel.entity.User;
+import pl.dubiel.repository.MessageRepository;
 import pl.dubiel.repository.UserRepository;
 
 @Controller
@@ -26,6 +28,9 @@ public class UserController {
 
 	@Autowired
 	UserRepository userrepo;
+	
+	@Autowired
+	MessageRepository mrepo;
 	
 
 @GetMapping("/register")
@@ -103,6 +108,10 @@ public class UserController {
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
 		s.invalidate();
+		List<Message> mess = this.mrepo.findBySenderOrderByCreatedDesc(u);
+		for (Message m: mess) {
+			this.mrepo.delete(m);
+		}
 		this.userrepo.delete(u);
 		return "redirect:/login";
 		}

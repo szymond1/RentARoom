@@ -38,13 +38,13 @@ public class User {
 	private String email;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	List<Flat> flats = new ArrayList<>();
+	private List<Flat> flats = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "sender",cascade = CascadeType.ALL,orphanRemoval=true)
-	List<User> sender = new ArrayList<>();
+	private List<User> sender = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "receiver",cascade = CascadeType.ALL,orphanRemoval=true)
-	List<User> receiver = new ArrayList<>();
+	private List<User> receiver = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Comment> comment = new ArrayList<>();
