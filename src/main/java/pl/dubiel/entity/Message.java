@@ -3,6 +3,7 @@ package pl.dubiel.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,10 +18,10 @@ public class Message {
 	
 	private String text;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User sender;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User reciever;
 	
 	private Date created;

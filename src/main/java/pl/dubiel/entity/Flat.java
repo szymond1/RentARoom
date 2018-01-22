@@ -60,7 +60,7 @@ public class Flat {
 	
 	private String photo;
 	
-	@OneToMany(mappedBy = "flat", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "flat", cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Comment> comment = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "flat",cascade = CascadeType.ALL)

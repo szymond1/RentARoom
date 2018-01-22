@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +39,15 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	List<Flat> flats = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "sender",cascade = CascadeType.ALL,orphanRemoval=true)
+	List<User> sender = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "receiver",cascade = CascadeType.ALL,orphanRemoval=true)
+	List<User> receiver = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<Comment> comment = new ArrayList<>();
 
 	public User() {
 		super();
@@ -94,5 +104,23 @@ public class User {
 	public void setFlats(List<Flat> flats) {
 		this.flats = flats;
 	}
+
+	public List<User> getSender() {
+		return sender;
+	}
+
+	public List<User> getReceiver() {
+		return receiver;
+	}
+
+	public void setSender(List<User> sender) {
+		this.sender = sender;
+	}
+
+	public void setReceiver(List<User> receiver) {
+		this.receiver = receiver;
+	}
+
+
 	
 }
