@@ -63,7 +63,7 @@ public class Flat {
 	@OneToMany(mappedBy = "flat", cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Comment> comment = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "rating", cascade = CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(mappedBy = "flat", cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<Rating> rating = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "flat",cascade = CascadeType.ALL)

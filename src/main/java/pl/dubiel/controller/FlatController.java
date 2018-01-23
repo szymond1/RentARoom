@@ -114,16 +114,18 @@ public class FlatController {
 	}
 
 	@GetMapping("/{id}")
-	public String particularFlat(Model m, @PathVariable long id) {
+	public String particularFlat(Model m, @PathVariable Long id) {
 		Flat flat = flatrepo.findOne(id);
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
 		List<Comment> comments = comrepo.findByFlatIdOrderByCreatedAsc(id);
 		List<Photos> photos =phrepo.findByFlatId(id);
+		double rating = this.ratingrepo.getAverageRating(flat);
 		m.addAttribute("user", u);
 		m.addAttribute("flat", flat);
 		m.addAttribute("comments", comments);
 		m.addAttribute("photos", photos);
+		m.addAttribute("rating", rating);
 		m.addAttribute("comment", new Comment());
 		return "single_flat";
 	}
@@ -193,24 +195,25 @@ public class FlatController {
 		return "redirect:/flat/" + flatId;
 	}
 	
-	@GetMapping("/addRating/{id}")
+	@GetMapping("/addRating/{flatId}")
 	public String addRate(Model m) {
 		m.addAttribute("rating", new Rating());
 		return "addRate";
 	}
 	
-	@PostMapping("/addRating/{id}")
-	public String addRateForm(@Valid @ModelAttribute Rating rating, BindingResult bindingResult, @PathVariable long id,Model m) {
+	@PostMapping("/addRating/{flatId}")
+	public String addRateForm(@Valid @ModelAttribute Rating rating, BindingResult bindingResult, @PathVariable long flatId, RedirectAttributes ra) {
 		if (bindingResult.hasErrors()) {
-			return "redirect:/addRating/{id}";
+			return "redirect:/flat/addRating/"+flatId;
 		}
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
-		Flat flat = this.flatrepo.findFirstById(id);
+		Flat flat = this.flatrepo.findOne(flatId);
 		rating.setUser(u);
 		rating.setFlat(flat);
+		rating.setOverall((rating.getCleanliness()+rating.getComfort()+rating.getExtras()+rating.getLocalization()+rating.getPersonel())/5);
 		this.ratingrepo.save(rating);
-		return "redirect:/flat/" + id;
+		return "redirect:/flat/" + flatId;
 	}
 	
 	

@@ -26,6 +26,8 @@
 	<br/>
 <div>
 	<p class ="flatName">${flat.name}</p>
+	
+	Ocena uzytkowników: ${rating}
 
 	<p>Localization: ${flat.postCode} ${flat.city} , ulica: ${flat.street} , wojewodztwo ${flat.voivodeship}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
@@ -40,6 +42,7 @@
           <span class="glyphicon glyphicon-envelope"></span> Send message 
         </a>
       </p> 
+      <a href="/RentaRoom/flat/addRating/${flat.id}"> Rate us! </a>
 	
 	</c:if>
 	<p>Contact: ${flat.user.email}</p>	

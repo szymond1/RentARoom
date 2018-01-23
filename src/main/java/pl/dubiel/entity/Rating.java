@@ -68,10 +68,6 @@ public class Rating {
 		return overall;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public void setLocalization(Double localization) {
 		this.localization = localization;
 	}
@@ -106,6 +102,10 @@ public class Rating {
 
 	public void setFlat(Flat flat) {
 		this.flat = flat;
+	}
+
+	public void setOverall(Double overall) {
+		this.overall = overall;
 	}
 
 	
