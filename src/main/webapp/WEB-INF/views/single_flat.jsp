@@ -27,7 +27,7 @@
 <div>
 	<p class ="flatName">${flat.name}</p>
 	
-	Ocena uzytkowników: ${rating}
+	Ocena uzytkowników: ${rating}, a uzytkownikow bylo ${rating1}
 
 	<p>Localization: ${flat.postCode} ${flat.city} , ulica: ${flat.street} , wojewodztwo ${flat.voivodeship}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>

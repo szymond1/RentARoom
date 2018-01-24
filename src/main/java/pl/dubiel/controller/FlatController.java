@@ -120,12 +120,14 @@ public class FlatController {
 		User u = (User) s.getAttribute("user");
 		List<Comment> comments = comrepo.findByFlatIdOrderByCreatedAsc(id);
 		List<Photos> photos =phrepo.findByFlatId(id);
-		double rating = this.ratingrepo.getAverageRating(flat);
+		Double rating = this.ratingrepo.getAverageRating(flat);
+		Long rating1 = this.ratingrepo.countAverageRating(flat);
 		m.addAttribute("user", u);
 		m.addAttribute("flat", flat);
 		m.addAttribute("comments", comments);
 		m.addAttribute("photos", photos);
 		m.addAttribute("rating", rating);
+		m.addAttribute("rating1", rating1);
 		m.addAttribute("comment", new Comment());
 		return "single_flat";
 	}

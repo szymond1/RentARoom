@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.dubiel.bean.LoginData;
 import pl.dubiel.bean.SessionManager;
 import pl.dubiel.entity.Message;
+import pl.dubiel.entity.Rating;
 import pl.dubiel.entity.User;
 import pl.dubiel.repository.MessageRepository;
 import pl.dubiel.repository.UserRepository;

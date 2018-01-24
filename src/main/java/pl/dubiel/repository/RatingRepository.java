@@ -15,6 +15,7 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
 	List<Rating> findByFlatId(long id);
 	@Query("SELECT AVG(r.overall) FROM Rating r WHERE r.flat = :flat")
-	double getAverageRating(@Param("flat") Flat flat);
-
+	Double getAverageRating(@Param("flat") Flat flat);
+	@Query("SELECT COUNT(r.overall) FROM Rating r WHERE r.flat = :flat")
+	Long countAverageRating(@Param("flat") Flat flat);
 }
