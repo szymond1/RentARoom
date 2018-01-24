@@ -26,28 +26,37 @@
 	<br/>
 <div>
 	<p class ="flatName">${flat.name}</p>
-	
-	Ocena uzytkowników: ${rating}, a uzytkownikow bylo ${rating1}
-
-	<p>Localization: ${flat.postCode} ${flat.city} , ulica: ${flat.street} , wojewodztwo ${flat.voivodeship}</p>
-	<p>Type of Flat: ${flat.typeOfFlat}</p>
-	<p>Surface: ${flat.surface}</p>
-	<p>Price: ${flat.price} zl</p>
-	<p>Max number of guests: ${flat.numberOfGuests}</p>
-	<p>Description: ${flat.description}</p>
-	<p>Author: ${flat.user.userName}</p><form action = "/RentaRoom/userFlats/${flat.user.id}"><button type="submit">Check all offers</button></form>
+	${msg}
+	<c:choose> 
+	<c:when test = "${rating1 != 0}" >
+ 	<div class="ratebox"><span class="ratecount">Liczba ocen: ${rating1}</span>
+      <div class="ratenum">${rating}</div>
+     </div>
+	</c:when>
+	<c:otherwise>
+	<div class="ratebox"><span class="ratecount">Be first, rate us</span>
+     </div>
+	</c:otherwise>
+	</c:choose>
+	<p>Localization: <b>${flat.postCode} ${flat.city}</b> , ulica: <b>${flat.street}</b> , wojewodztwo <b>${flat.voivodeship}</b></p>
+	<p>Type of Flat: <b>${flat.typeOfFlat}</b></p>
+	<p>Surface: <b>${flat.surface}</b></p>
+	<p>Price: <b>${flat.price}</b> zl</p>
+	<p>Max number of guests: <b>${flat.numberOfGuests}</b></p>
+	<p>Description: <b>${flat.description}</b></p>
+	<p>Author: <b>${flat.user.userName}</b></p><form action = "/RentaRoom/userFlats/${flat.user.id}"><button type="submit">Check all offers</button></form>
+     
 	<c:if test="${user.userName != flat.user.userName}">
 	    <p>
         <a href="/RentaRoom/message/${flat.user.id}" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-envelope"></span> Send message 
         </a>
       </p> 
-      <a href="/RentaRoom/flat/addRating/${flat.id}"> Rate us! </a>
-	
+      <a href="/RentaRoom/flat/addRating/${flat.id}" style="background:yellow; color:black;" class="btn btn-info btn-lg"> Rate us! </a>
 	</c:if>
+	
 	<p>Contact: ${flat.user.email}</p>	
 
-${photo.url}
 	<div style="width:800; background-color:white; height:300px; overflow:auto;">
 	<div style="width: auto; height: auto;">
 	<c:forEach items="${photos}" var="photo">
@@ -60,8 +69,7 @@ ${photo.url}
 	<form action="/RentaRoom/add/photos/${flat.id}"><button type="submit">Add new photos</button></form>
 	<form action="/RentaRoom/flat/edit/${flat.id}"><button type="submit">Edit offer</button></form>
 	<form action="/RentaRoom/flat/delete/${flat.id}"><button type="submit">Delete offer</button></form>
-	<!--  <p><a href = "/RentaRoom/flat/edit/${flat.id}">Edit offer</a>
-	 <a href = "/RentaRoom/flat/delete/${flat.id}">Delete offer</a></p>-->
+
 	</c:if>
 	<div>
 	<p class = "comments"> Comments</p>

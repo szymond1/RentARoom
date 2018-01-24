@@ -16,12 +16,16 @@ import pl.dubiel.bean.SessionManager;
 import pl.dubiel.entity.Flat;
 import pl.dubiel.entity.User;
 import pl.dubiel.repository.FlatRepository;
+import pl.dubiel.repository.RatingRepository;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
 	FlatRepository flatrepo;
+	
+	@Autowired
+	RatingRepository ratingrepo;
 	
 	@GetMapping("")
 	public String home(Model m) {
@@ -43,8 +47,14 @@ public class HomeController {
 		}
 		List<Flat> userFlats = this.flatrepo.findByUserIdOrderByCreatedDesc(userId);
 		Flat flat = this.flatrepo.findFirstByUserId(userId);
+		
+		Double rate = this.ratingrepo.getAverageRating(flat);
+		String rating = String.format("%,.2f", rate);
+		Long rating1 = this.ratingrepo.countAverageRating(flat);
 		m.addAttribute("flat",flat);
 		m.addAttribute("userFlats", userFlats);
+		m.addAttribute("rating", rating);
+		m.addAttribute("rating1", rating1);
 		return "userId";
 	}
 	

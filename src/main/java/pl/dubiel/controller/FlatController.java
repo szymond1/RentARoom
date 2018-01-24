@@ -120,7 +120,8 @@ public class FlatController {
 		User u = (User) s.getAttribute("user");
 		List<Comment> comments = comrepo.findByFlatIdOrderByCreatedAsc(id);
 		List<Photos> photos =phrepo.findByFlatId(id);
-		Double rating = this.ratingrepo.getAverageRating(flat);
+		Double rate = this.ratingrepo.getAverageRating(flat);
+		String rating = String.format("%,.2f", rate);
 		Long rating1 = this.ratingrepo.countAverageRating(flat);
 		m.addAttribute("user", u);
 		m.addAttribute("flat", flat);
@@ -204,13 +205,17 @@ public class FlatController {
 	}
 	
 	@PostMapping("/addRating/{flatId}")
-	public String addRateForm(@Valid @ModelAttribute Rating rating, BindingResult bindingResult, @PathVariable long flatId, RedirectAttributes ra) {
+	public String addRateForm(@Valid @ModelAttribute Rating rating, BindingResult bindingResult, @PathVariable long flatId, RedirectAttributes ra, Model m) {
 		if (bindingResult.hasErrors()) {
 			return "redirect:/flat/addRating/"+flatId;
 		}
 		HttpSession s = SessionManager.session();
 		User u = (User) s.getAttribute("user");
 		Flat flat = this.flatrepo.findOne(flatId);
+		List<Rating> ratings = this.ratingrepo.findByFlatIdAndUserId(flat.getId(), u.getId());
+		if (ratings != null) {
+			return "redirect:/flat/" + flatId;
+		}
 		rating.setUser(u);
 		rating.setFlat(flat);
 		rating.setOverall((rating.getCleanliness()+rating.getComfort()+rating.getExtras()+rating.getLocalization()+rating.getPersonel())/5);

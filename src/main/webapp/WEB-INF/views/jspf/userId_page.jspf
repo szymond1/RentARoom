@@ -7,6 +7,7 @@
 <br>
 <br>
 <p class = allOffers> Offers by user: ${flat.user.userName}</p>
+
 <p>
    <a href="/RentaRoom/message/${flat.user.id}" class="btn btn-info btn-lg">
     <span class="glyphicon glyphicon-envelope"></span> Send message 
@@ -19,10 +20,11 @@
 </c:when>
 <c:otherwise>
 
+
 <c:forEach items="${userFlats}" var="flat">
 <div>
 <div class = "div1">
-	<p class ="flatName"><b>Name: ${flat.name}</b></p>
+	<p class ="flatName"><a href="/RentaRoom/flat/${flat.id}"><b>${flat.name}</b></a></p>
 	<p>City: ${flat.city}</p>
 	<p>Type of Flat: ${flat.typeOfFlat}</p>
 	<p>Price: ${flat.price} zl</p>
